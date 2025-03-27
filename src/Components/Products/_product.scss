@@ -1,0 +1,47 @@
+@import "../../style/saas/mixins";
+
+//import fn from mixin to format a and li
+@include style-reset-a-li;
+
+//appying flex in parent container
+.products-container {
+  display: flex;
+  //this property used such that container not exceed window size
+  flex-wrap: wrap;
+  justify-content: space-evenly; //give even spacing each item of the div ->no need to add margin
+  .product-card {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    box-shadow: 3px 1px 14px 0px lightgray; //it provided outer box containes image and other field
+    border-radius: 0.6em;
+
+    //styling for image
+    .product-image-container {
+      display: flex;
+      justify-content: center;
+      img {
+        border-radius: 0.4em;
+      }
+    }
+    .product-info {
+      padding: 1em;
+      text-align: center;
+
+      h5 {
+        font-weight: 700;
+      }
+
+      .product-price {
+        margin: 0;
+        font-weight: 400;
+        font-size: 1.2em;
+      }
+
+      .product-rating {
+        i {
+          color: gold;
+        }
+      }
+    }
+  }
+}

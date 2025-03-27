@@ -1,0 +1,42 @@
+//create a mixin->fn created with the help of saas
+@mixin transition($property, $duration) {
+  transition-property: $property;
+  transition-duration: $duration;
+}
+
+@mixin underline-transition($width) {
+  //add after sudo
+  &::after {
+    content: "";
+    display: block;
+    bottom: 0;
+    left: 0;
+    height: 0.2em; //height of line below
+    background-color: $accent-color;
+    transform: scaleX(0);
+    //calling mixin fn
+    @include transition(transform, 0.2);
+  }
+
+  &:hover {
+    &::after {
+      transform: scaleX(
+        $width
+      ); //for eg 1.1->underline exceed the text width a bit
+    }
+  }
+}
+
+@mixin style-reset-a-li {
+  a {
+    text-decoration: none;
+    color: black;
+    &:hover {
+      color: black;
+    }
+  }
+
+  li {
+    list-style-type: none; //to remove the bullet
+  }
+}

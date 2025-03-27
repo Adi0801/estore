@@ -1,0 +1,35 @@
+@import "../../style/saas/mixins";
+@import "../../style/saas/variable";
+.side-nav {
+  margin-top: 1em; /* Pushes the sidebar down slightly */
+  padding: 0.6em; /* Adds inner spacing */
+  box-shadow: 1px 0px 14px 0px lightgray; /* Adds a subtle shadow for depth */
+  height: 100%; /* Fixes the height */
+  border-radius: 1em; //rounded border
+
+  .section-title {
+    padding: 1em; //spacing bt category and top part
+
+    h3 {
+      text-align: center;
+    }
+  }
+
+  .individual-category {
+    ul {
+      padding: 0;
+    }
+
+    .sub-items {
+      text-align: center;
+      margin-bottom: 0.6em;
+      list-style-type: none;
+
+      a {
+        text-decoration: none;
+        color: black;
+        @include underline-transition(0.3);
+      }
+    }
+  }
+}
