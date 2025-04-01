@@ -1,6 +1,21 @@
+import { useSelector } from "react-redux";
 import "./_top-nav.scss";
+import { Link } from "react-router-dom";
+import GoogleLogin from "react-google-login";
+import { useState } from "react";
 
+//to fetching the response google login sent we use gapi
+import { gapi } from "gapi-script";
 const TopNav = () => {
+  //fetch total item from cart component that update cart in top-nav
+  const cartItemCount = useSelector((state) => state.cr.totalItems);
+  //creating state for userdetails
+  const [userDetails, setUserDetails] = useState();
+
+  //google login automatically sents response after login
+  const successHandler = (res) => {
+    setUserDetails(res.profileObj);
+  };
   return (
     <div>
       <div className="header bg-dark">
@@ -27,11 +42,19 @@ const TopNav = () => {
             {/* user icon is custom css class */}
             <i className="fa fa-user-circle user-icon" />
             <h5>
-              <a href="#">Login</a>
-            </h5>
-            /
-            <h5>
-              <a href="#">Register</a>
+              {
+                //adding conditional rendering
+                userDetails === "" ? (
+                  <GoogleLogin
+                    clientId="47617158332-rtis570o73iar4d396n05l3vdcqeb3pb.apps.googleusercontent.com"
+                    buttonText="Login"
+                    cookiePolicy="single_host_origin"
+                    onSuccess={successHandler}
+                  />
+                ) : (
+                  userDetails.name
+                )
+              }
             </h5>
           </div>
           <div className="cart-wishlist">
@@ -39,9 +62,21 @@ const TopNav = () => {
               <li className="list-icon">
                 <i className="fa fa-heart" />
               </li>
-              <li className="list-icon">
-                <i className="fa fa-shopping-cart" />
-              </li>
+              <Link to="/cart">
+                <li className="list-icon">
+                  <i className="fa fa-shopping-cart" />
+                  {
+                    //if we add sometime in cart it show else it number are hidden
+                    cartItemCount !== 0 ? (
+                      <div className="cart-item-count">
+                        <p>{cartItemCount}</p>
+                      </div>
+                    ) : (
+                      <></>
+                    )
+                  }
+                </li>
+              </Link>
             </ul>
           </div>
         </div>
